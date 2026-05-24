@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f2f2;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: green;
+        }
+
+        .product {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .product img {
+            width: 200px;
+            border-radius: 10px;
+        }
+
+        .methods {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            background: #ddd;
+            font-weight: bold;
+        }
+
+        .btn.active {
+            background: green;
+            color: white;
+        }
+
+        .box {
+            display: none;
+            margin-top: 20px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .pay {
+            width: 100%;
+            padding: 12px;
+            background: green;
+            color: white;
+            border: none;
+            margin-top: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .qr {
+            text-align: center;
+        }
+
+        .qr img {
+            width: 200px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Secure Payment</h1>
+
+        <div class="product">
+            <img id="img" alt="Product image">
+            <h2 id="name"></h2>
+            <h3>₹ <span id="price"></span></h3>
+        </div>
+
+        <div class="methods">
+            <button class="btn" onclick="openTab('upi',this)">UPI</button>
+            <button class="btn" onclick="openTab('card',this)">Card</button>
+            <button class="btn" onclick="openTab('qr',this)">QR</button>
+        </div>
+
+        <!-- UPI -->
+        <div id="upi" class="box">
+            <input placeholder="Enter UPI ID">
+            <button class="pay" onclick="pay('UPI')">Pay Now</button>
+        </div>
+        <!-- CARD -->
+        <div id="card" class="box">
+            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="16" autocomplete="off">
+
+            <input type="text" id="expiry" placeholder="MM/YY" maxlength="5" autocomplete="off">
+            <input type="password" id="cvv" placeholder="CVV" maxlength="3" autocomplete="off">
+
+            <button class="pay" onclick="payCard()">
+                Pay Now
+            </button>
+
+        </div>
+
+        <!-- QR -->
+        <div id="qr" class="box qr">
+            <h3>Scan QR</h3>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=payment">
+            <button class="pay" onclick="pay('QR')">I Have Paid</button>
+        </div>
+
+    </div>
+
+    <script>
+
+        let product = JSON.parse(localStorage.getItem("buyNowProduct"));
+
+        if (!product) {
+            alert("No product found");
+            window.location.href = "index.html";
+        }
+
+        document.getElementById("img").src = product.image;
+        document.getElementById("name").innerText = product.name;
+        document.getElementById("price").innerText = product.price;
+
+        function openTab(id, btn) {
+
+            document.querySelectorAll(".box").forEach(b => b.style.display = "none");
+            document.getElementById(id).style.display = "block";
+
+            document.querySelectorAll(".btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+        }
+
+        function pay(method) {
+
+            let product = JSON.parse(localStorage.getItem("buyNowProduct"));
+
+            let order = {
+                name: product.name,
+                price: product.price,
+                qty: 1,
+                total: product.price,
+                image: product.image,
+                paymentMethod: method
+            };
+
+            localStorage.setItem("successOrder", JSON.stringify(order));
+
+            window.location.href = "payment process.html";
+        }
+
+
+        /* YAHI NICHE PASTE KARO */
+
+        const cardInput = document.getElementById("cardNumber");
+
+        cardInput.addEventListener("input", function (e) {
+
+            let value = e.target.value.replace(/[^0-9]/g, '');
+
+            if (value.length > 16) {
+                value = value.substring(0, 16);
+            }
+
+            e.target.value = value;
+        });
+
+
+        const expiryInput = document.getElementById("expiry");
+
+        expiryInput.addEventListener("input", function (e) {
+
+            let value = e.target.value.replace(/[^0-9]/g, '');
+
+            if (value.length > 4) {
+                value = value.substring(0, 4);
+            }
+
+            if (value.length >= 3) {
+                value = value.slice(0, 2) + "/" + value.slice(2);
+            }
+
+            e.target.value = value;
+        });
+
+
+        function payCard() {
+
+            let card = document.getElementById("cardNumber").value.trim();
+            let expiry = document.getElementById("expiry").value.trim();
+            let cvv = document.getElementById("cvv").value.trim();
+
+            if (card.length !== 16) {
+                alert("❌ Card number must be 16 digits");
+                return;
+            }
+
+            if (!/^\d{2}\/\d{2}$/.test(expiry)) {
+                alert("❌ Invalid expiry format");
+                return;
+            }
+
+            let parts = expiry.split('/');
+
+            let month = parseInt(parts[0]);
+            let year = parseInt(parts[1]);
+
+            if (month < 1 || month > 12) {
+                alert("❌ Invalid expiry month");
+                return;
+            }
+
+            let today = new Date();
+
+            let currentMonth = today.getMonth() + 1;
+            let currentYear = today.getFullYear() % 100;
+
+            if (year < currentYear ||
+                (year === currentYear && month < currentMonth)) {
+
+                alert("❌ Card expired");
+                return;
+            }
+
+            if (!/^\d{3}$/.test(cvv)) {
+                alert("❌ CVV must be 3 digits");
+                return;
+            }
+
+            pay('CARD');
+        }
+
+    </script>
+
+</body>
+
+</html>

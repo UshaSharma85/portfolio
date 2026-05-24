@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Profile Page</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav class="navbar">
+
+  <div class="logo">MySite</div>
+
+  <div class="nav-links">
+
+    <a href="#education">Education</a>
+
+    <a href="#skills">Skills</a>
+
+    <a href="#projects">Project Notes</a>
+
+  </div>
+
+</nav>
+
+<!-- PROFILE PAGE -->
+<section class="profile-page">
+
+  <!-- PROFILE HEADER -->
+  <div class="profile-header">
+
+    <img src="image/girl.jpg" alt="profile">
+
+    <h1>Usha Sharma</h1>
+    <h3>Frontend Developer & E-Commerce Designer</h3>
+
+    <p>
+      Passionate web developer creating modern UI and responsive websites.
+    </p>
+
+  </div>
+
+  <!-- EDUCATION SECTION -->
+ <div class="section-card" id="education">
+
+    <h2>🎓 Education</h2>
+
+    <div class="edu-box">
+      <h4>Bachelor of Arts (BA)</h4>
+      <p>Delhi University</p>
+      <span>2026</span>
+    </div>
+
+    <div class="edu-box">
+      <h4>ADCE Diploma</h4>
+      <p>Computer Engineering (HTML, CSS, JS)</p>
+      <span>2025</span>
+    </div>
+
+  </div>
+<!-- SKILLS SECTION -->
+<section class="skills-page" id="skills">    
+  <h1>My Skills</h1>
+
+    <div class="skills-container">
+
+        <div class="skill-card" onclick="showInfo('C', 'C is a powerful system programming language Styles the web page design, colors, layout.')">
+    <i class="fa-brands fa-cuttlefish"></i>
+    <div class="circle" style="--percent:70%">70%</div>
+    <h3>C</h3>
+</div>
+        
+
+        <div class="skill-card" onclick="showInfo('C++', 'C++ is a powerful object-oriented programming language used for system and game development.')">
+    <i class="fa-solid fa-code"></i>
+    <div class="circle" style="--percent:75%">75%</div>
+    <h3>C++</h3>
+</div>
+
+        <div class="skill-card" onclick="showInfo('Java', 'Java is a high-level object-oriented programming language used for applications and Android development.')">
+    <i class="fa-brands fa-java"></i>
+    <div class="circle" style="--percent:65%">65%</div>
+    <h3>Java</h3>
+</div>
+
+        <div class="skill-card" onclick="showInfo('Python', 'Python is an easy-to-learn programming language used in AI, data science and web development.')">
+    <i class="fa-brands fa-python"></i>
+    <div class="circle" style="--percent:70%">70%</div>
+    <h3>Python</h3>
+</div>
+
+        <div class="skill-card" onclick="showInfo('SQL', 'SQL is used to manage and manipulate relational databases.')">
+    <i class="fa-solid fa-database"></i>
+    <div class="circle" style="--percent:80%">80%</div>
+    <h3>SQL</h3>
+</div>
+
+       <div class="skill-card" onclick="showInfo('Laravel', 'Laravel is a PHP framework used for building modern web applications.')">
+    <i class="fa-brands fa-laravel"></i>
+    <div class="circle" style="--percent:70%">70%</div>
+    <h3>Laravel</h3>
+</div>
+
+         <div class="skill-card" onclick="showInfo('CO', 'Laravel is a PHP framework used for building modern web applications.')">
+    <i class="fa-brands fa-laravel"></i>
+    <div class="circle" style="--percent:70%">70%</div>
+    <h3>CO</h3>
+</div>
+
+        <div class="skill-card" onclick="showInfo('Laravel', 'Laravel is a PHP framework used for building modern web applications.')">
+    <i class="fa-brands fa-laravel"></i>
+    <div class="circle" style="--percent:70%">70%</div>
+    <h3>Framework</h3>
+</div>
+
+</div>
+<!-- PROJECT NOTES SECTION -->
+
+
+<section class="project-notes" id="projects">
+
+    <h2>📘 Project Notes</h2>
+
+    <div class="notes-box">
+
+        <h3>Modern E-Commerce Website</h3>
+
+        <p>
+            This is a modern and responsive E-Commerce Website developed
+            using HTML, CSS, and JavaScript.
+        </p>
+
+        <p>
+            The website includes interactive features such as:
+        </p>
+
+        <ul>
+            <li>Responsive Navigation Bar</li>
+            <li>Animated Hero Slider</li>
+            <li>Shopping Cart System</li>
+            <li>Add To Cart Functionality</li>
+            <li>Buy Now Option</li>
+            <li>Product Details Popup</li>
+            <li>Skills Section with Animation</li>
+            <li>Responsive Design</li>
+        </ul>
+
+        <p>
+            I designed this project myself with modern UI/UX,
+            hover effects, animations, glowing elements,
+            and responsive layouts.
+        </p>
+
+        <p>
+            Technologies Used:
+            HTML5, CSS3, JavaScript, Font Awesome, Local Storage API.
+        </p>
+
+    </div>
+
+</section>
+<a href="index.html" class="back-btn">
+   ← Back
+</a>
+</section>
+<div id="popup" class="popup">
+    <div class="popup-box">
+        <h2 id="popup-title"></h2>
+        <p id="popup-text"></p>
+        <button onclick="closePopup()">Close</button>
+    </div>
+</div>
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Payment Processing</title>
+
+<style>
+
+body{
+  margin:0;
+  font-family:Segoe UI;
+  background:linear-gradient(135deg,#e8fff0,#f4fff7);
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* LOADER */
+.loader{
+  text-align:center;
+}
+
+.coin{
+  width:80px;
+  height:80px;
+  background:gold;
+  border-radius:50%;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+  100%{transform:rotateY(360deg);}
+}
+
+.loading{
+  margin-top:15px;
+  font-size:20px;
+  color:green;
+  font-weight:bold;
+}
+
+/* SUCCESS BOX */
+.box{
+  display:none;
+  background:white;
+  padding:30px;
+  border-radius:15px;
+  width:380px;
+  text-align:center;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.check{
+  width:80px;
+  height:80px;
+  background:green;
+  color:white;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:40px;
+  margin:auto;
+}
+
+h1{color:green;}
+
+img{
+  width:150px;
+  margin:10px 0;
+  border-radius:10px;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  margin-top:20px;
+  border:none;
+  background:green;
+  color:white;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:darkgreen;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="loader" id="loader">
+  <div class="coin">₹</div>
+  <div class="loading">Processing Payment...</div>
+</div>
+
+<div class="box" id="box">
+
+  <div class="check">✔</div>
+
+  <h1>Payment Successful</h1>
+
+  <img id="img">
+
+  <h3 id="name"></h3>
+  <h3>Qty: <span id="qty"></span></h3>
+  <h3>Total: ₹<span id="total"></span></h3>
+  <h3>Method: <span id="method"></span></h3>
+
+  <button onclick="goHome()">Back to Home</button>
+
+</div>
+
+<script>
+
+let order = JSON.parse(localStorage.getItem("successOrder"));
+
+if(!order){
+  alert("No order found");
+  window.location.href = "index.html";
+}
+
+document.getElementById("name").innerText = order.name || "";
+document.getElementById("qty").innerText = order.qty || 1;
+document.getElementById("total").innerText = order.total || 0;
+document.getElementById("method").innerText = order.paymentMethod || "";
+document.getElementById("img").src = order.image || "";
+
+setTimeout(()=>{
+  document.getElementById("loader").style.display="none";
+  document.getElementById("box").style.display="block";
+},3000);
+
+function goHome(){
+  localStorage.removeItem("successOrder");
+  window.location.href="index.html";
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern E-Commerce Website</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- CSS LINK -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="logo">ShopX</div>
+
+        <div class="nav-links" id="navLinks">
+            <a href="#home">Home</a>
+            <a href="#products">Products</a>
+            <a href="profile.html">Profile</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+        <body>
+
+            <div class="buy-popup" id="buy-popup">
+
+                <div class="buy-box">
+
+                    <h2>Order Summary</h2>
+
+                    <p id="buy-name"></p>
+                    <p id="buy-price"></p>
+
+                    <button onclick="confirmOrder()">Confirm Order</button>
+
+                    <span onclick="closeBuyPopup()">&times;</span>
+
+                </div>
+
+            </div>
+
+            <!-- JS FILE -->
+            <!--  <script src="javascript.js"></script> -->
+
+        </body>
+        <div class="icons">
+            <div class="cart" id="cartBtn">
+                🛒
+                <div class="cart-count" id="cartCount">0</div>
+            </div>
+
+            <div class="menu-btn" id="menuBtn">☰</div>
+        </div>
+
+    </nav>
+
+    <!-- HERO -->
+
+
+    <!-- HERO SECTION -->
+
+    <section class="hero">
+
+        <div class="slider">
+
+            <!-- IMAGE 1 -->
+            <div class="slide active">
+                <img src="image/image12.jpg" alt="">
+            </div>
+
+            <!-- IMAGE 2 -->
+            <div class="slide">
+                <img src="image/image04.jpg" alt="">
+            </div>
+
+            <!-- IMAGE 3 -->
+            <div class="slide">
+                <img src="image/image14.jpg" alt="">
+            </div>
+
+            <!-- IMAGE 4 -->
+            <div class="slide">
+                <img src="image/image04.jpg" alt="">
+            </div>
+
+            <div class="overlay"></div>
+
+        </div>
+
+        <div class="hero-content">
+            <h1>Modern E-Commerce Store</h1>
+            <p>Best Deals & Trending Products</p>
+            <a href="#home" class="btn" target="_blank" rel="noopener noreferrer">
+                Shop Now
+            </a>
+        </div>
+
+    </section>
+
+    <!-- PRODUCTS -->
+
+    <section class="products-section">
+
+        <h2 class="section-title">Trending Products</h2>
+
+        <div class="products" id="products">
+
+        </div>
+
+    </section>
+
+    <!-- CART -->
+
+    <div class="cart-sidebar" id="cartSidebar">
+        <button class="close-cart" id="closeCartBtn" onclick="closeCart()">
+            &times;
+        </button>
+        <h2>Your Cart</h2>
+
+        <div id="cartItems"></div>
+
+        <h3>Total: ₹<span id="total">0</span></h3>
+
+    </div>
+
+
+    </section>
+
+    <div id="modal" class="modal">
+
+        <div class="modal-box">
+
+            <span class="close-btn" onclick="closeModal()">
+                &times;
+            </span>
+
+            <h2 id="d-name"></h2>
+
+            <h3 id="d-price"></h3>
+
+            <p id="d-description"></p>
+
+        </div>
+
+    </div>
+
+    <!-- CONTACT SECTION -->
+
+    <section id="contact" class="contact-section">
+
+        <h2 class="section-title">Contact Us</h2>
+
+        <div class="contact-container">
+
+            <form class="contact-form">
+
+                <input type="text" placeholder="Your Name" required>
+
+                <input type="email" placeholder="Your Email" required>
+
+                <textarea placeholder="Your Message"></textarea>
+
+                <button type="submit">Send Message</button>
+
+            </form>
+
+        </div>
+
+    </section>
+    <!-- FOOTER -->
+
+    <footer>
+        © 2026 ShopX. All Rights Reserved.
+    </footer>
+    <script src="script.js"></script>
+
+
+
+</body>
+
+</html>
